@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Собрать ланч — Food Construct</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lunch.css">
+</head>
+<body class="lunch-page">
+
+    <header>
+        <h1>Food Construct</h1>
+        <nav>
+            <a href="index.html">О нас</a>
+            <a class="active" href="lunch.html">Собрать ланч</a>
+            <a href="order.html">Оформить заказ</a>
+            <a href="orders.html">Заказы</a>
+            <a href="feedback.html">Обратная связь</a>
+            <a href="#contacts">Контакты</a>
+            <a href="login.html">Вход</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="combo-section">
+            <h2>Доступные для заказа комбо</h2>
+            <div class="combo-grid">
+                <div class="combo">
+                    <div class="combo-item"><img src="img/YSLsoup.jpg" alt="Суп"><p>Суп</p></div>
+                    <div class="combo-item"><img src="img/YSLmain.jpg" alt="Главное блюдо"><p>Главное блюдо</p></div>
+                    <div class="combo-item"><img src="img/YSLsalad.jpg" alt="Салат"><p>Салат</p></div>
+                    <div class="combo-item"><img src="img/YSLdrink.jpg" alt="Напиток"><p>Напиток</p></div>
+                </div>
+                <div class="combo">
+                    <div class="combo-item"><img src="img/YSLsoup.jpg" alt="Суп"><p>Суп</p></div>
+                    <div class="combo-item"><img src="img/YSLmain.jpg" alt="Главное блюдо"><p>Главное блюдо</p></div>
+                    <div class="combo-item"><img src="img/YSLdrink.jpg" alt="Напиток"><p>Напиток</p></div>
+                </div>
+                <div class="combo">
+                    <div class="combo-item"><img src="img/YSLsoup.jpg" alt="Суп"><p>Суп</p></div>
+                    <div class="combo-item"><img src="img/YSLsalad.jpg" alt="Салат"><p>Салат</p></div>
+                    <div class="combo-item"><img src="img/YSLdrink.jpg" alt="Напиток"><p>Напиток</p></div>
+                </div>
+                <div class="combo">
+                    <div class="combo-item"><img src="img/YSLmain.jpg" alt="Главное блюдо"><p>Главное блюдо</p></div>
+                    <div class="combo-item"><img src="img/YSLsalad.jpg" alt="Салат"><p>Салат</p></div>
+                    <div class="combo-item"><img src="img/YSLdrink.jpg" alt="Напиток"><p>Напиток</p></div>
+                </div>
+                <div class="combo">
+                    <div class="combo-item"><img src="img/YSLmain.jpg" alt="Главное блюдо"><p>Главное блюдо</p></div>
+                    <div class="combo-item"><img src="img/YSLdrink.jpg" alt="Напиток"><p>Напиток</p></div>
+                </div>
+                <div class="combo combo-dessert">
+                    <div class="combo-item">
+                        <img src="img/YSLdesert.jpg" alt="Десерт">
+                        <p>Десерт</p>
+                        <p class="dessert-note">(Можно добавить к любому заказу)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-section">
+            <h2>Выберите суп</h2>
+            <div class="dish-filters" data-filter-for="soup" aria-label="Фильтр супов">
+  <button type="button" class="filter-button" data-filter="fish">рыбный</button>
+  <button type="button" class="filter-button" data-filter="meat">мясной</button>
+  <button type="button" class="filter-button" data-filter="vegetarian">вегетарианский</button>
+</div>
+            <div class="dishes" id="soup-container"></div>
+        </section>
+        <section class="menu-section">
+            <h2>Выберите главное блюдо</h2>
+            <div class="dish-filters" data-filter-for="main" aria-label="Фильтр главных блюд">
+  <button type="button" class="filter-button" data-filter="fish">рыбное</button>
+  <button type="button" class="filter-button" data-filter="meat">мясное</button>
+  <button type="button" class="filter-button" data-filter="vegetarian">вегетарианское</button>
+</div>
+            <div class="dishes" id="main-container"></div>
+        </section>
+        <section class="menu-section">
+            <h2>Выберите салат</h2>
+            <div class="dish-filters" data-filter-for="salad" aria-label="Фильтр салатов">
+  <button type="button" class="filter-button" data-filter="fish">рыбный</button>
+  <button type="button" class="filter-button" data-filter="meat">мясной</button>
+  <button type="button" class="filter-button" data-filter="vegetarian">вегетарианский</button>
+</div>
+            <div class="dishes" id="salad-container"></div>
+        </section>
+        <section class="menu-section">
+            <h2>Выберите напиток</h2>
+            <div class="dish-filters" data-filter-for="drink" aria-label="Фильтр напитков">
+  <button type="button" class="filter-button" data-filter="cold">холодный</button>
+  <button type="button" class="filter-button" data-filter="hot">горячий</button>
+</div>
+            <div class="dishes" id="drink-container"></div>
+        </section>
+        <section class="menu-section">
+            <h2>Выберите десерт</h2>
+            <div class="dish-filters" data-filter-for="dessert" aria-label="Фильтр десертов">
+  <button type="button" class="filter-button" data-filter="small">маленькая порция</button>
+  <button type="button" class="filter-button" data-filter="medium">средняя порция</button>
+  <button type="button" class="filter-button" data-filter="large">большая порция</button>
+</div>
+            <div class="dishes" id="dessert-container"></div>
+        </section>
+
+        <!-- Панель перехода к оформлению (вместо формы) -->
+        <div id="checkout-panel" class="checkout-panel" style="display: none;">
+            <div class="checkout-panel-inner">
+                <span class="checkout-total">Итого: <span id="panel-total">0</span>₽</span>
+                <a href="order.html" id="checkout-link" class="checkout-btn">Перейти к оформлению</a>
+            </div>
+        </div>
+    </main>
+
+    <footer id="contacts">
+        <p>Позвонить нам <a href="tel:+70000000000">+7-000-000-00-00</a></p>
+    </footer>
+
+    <script src="lunch.js"></script>
+    <script src="hub-link.js"></script>
+</body>
+</html>
