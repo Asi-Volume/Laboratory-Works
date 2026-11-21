@@ -1,22 +1,44 @@
 let dishes = [];
+const DEMO_API_URL = 'https://dummyjson.com/recipes?limit=30';
 
 async function loadDishes() {
     try {
-        const response = await fetch('https://dummyjson.com/recipes?limit=30');
+        const response = await fetch(DEMO_API_URL);
 
         if (!response.ok) {
-            throw new Error('Ошибка загрузки блюд');
+            throw new Error(`Ошибка DummyJSON: ${response.status}`);
         }
 
         const data = await response.json();
 
+        if (!Array.isArray(data.recipes) || data.recipes.length === 0) {
+            throw new Error('Список блюд пуст');
+        }
+
         dishes = mapDummyRecipes(data.recipes);
 
         renderDishes();
+
     } catch (error) {
         console.error('Ошибка загрузки блюд:', error);
+        alert('Не удалось загрузить блюда. Проверьте подключение к интернету.');
     }
 }
+
+function mapDummyRecipes(recipes) {
+    const categories = ['soup', 'main', 'salad', 'drink', 'dessert'];
+
+    return recipes.map((recipe, index) => ({
+        id: 9000 + Number(recipe.id),
+        keyword: `dummy-${recipe.id}`,
+        name: recipe.name,
+        price: Math.round(150 + (Number(recipe.caloriesPerServing || 200) % 9) * 25),
+        category: categories[index % categories.length],
+        count: `${Math.max(1, Number(recipe.servings || 1)) * 100} г`,
+        image: recipe.image
+    }));
+}
+
 
 function renderDishes() {
     const containers = {
