@@ -2,26 +2,32 @@ let dishes = [];
 const DEMO_API_URL = 'https://dummyjson.com/recipes?limit=30';
 
 async function loadDishes() {
+    console.time('Загрузка DummyJSON');
+
     try {
+        console.log('Начинаем загрузку блюд');
+
         const response = await fetch(DEMO_API_URL);
 
-        if (!response.ok) {
-            throw new Error(`Ошибка DummyJSON: ${response.status}`);
-        }
+        console.log('Ответ API получен:', response.status);
 
         const data = await response.json();
 
-        if (!Array.isArray(data.recipes) || data.recipes.length === 0) {
-            throw new Error('Список блюд пуст');
-        }
+        console.log('Получено рецептов:', data.recipes?.length);
 
         dishes = mapDummyRecipes(data.recipes);
 
+        console.log('Блюда преобразованы:', dishes.length);
+
+        console.timeEnd('Загрузка DummyJSON');
+
         renderDishes();
 
+        console.log('Отрисовка завершена');
+
     } catch (error) {
-        console.error('Ошибка загрузки блюд:', error);
-        alert('Не удалось загрузить блюда. Проверьте подключение к интернету.');
+        console.timeEnd('Загрузка DummyJSON');
+        console.error('Ошибка загрузки:', error);
     }
 }
 
