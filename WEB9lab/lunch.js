@@ -49,31 +49,37 @@ function mapDummyRecipes(recipes) {
 
 async function loadDishes() {
     try {
-        const response = await fetch(`${BASE_URL}/dishes`);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        if (!Array.isArray(data) || data.length === 0) throw new Error('Пустой или некорректный ответ API');
-        dishes = data;
-        dataSource = 'mospolytech';
-        showApiStatus('primary', 'Основной источник: API Мосполитеха. Меню загружено с сервера.');
-    } catch (error) {
-        console.warn('Основной API недоступен, переключаемся на DummyJSON:', error);
-        try {
-            const response = await fetch(DEMO_API_URL);
-            if (!response.ok) throw new Error(`DummyJSON HTTP ${response.status}`);
-            const data = await response.json();
-            if (!Array.isArray(data.recipes) || data.recipes.length === 0) throw new Error('DummyJSON вернул пустой список');
-            dishes = mapDummyRecipes(data.recipes);
-            dataSource = 'dummyjson';
-            showApiStatus('demo', 'Демо-режим: меню загружено реальным GET-запросом к DummyJSON. Заказы в этом режиме сохраняются в браузере.');
-        } catch (demoError) {
-            showApiStatus('error', 'Не удалось загрузить меню ни с основного API, ни с DummyJSON. Проверьте подключение к интернету.');
-            console.error(demoError);
-            return;
+        const response = await fetch(DEMO_API_URL);
+
+        if (!response.ok) {
+            throw new Error(`DummyJSON HTTP ${response.status}`);
         }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data.recipes) || data.recipes.length === 0) {
+            throw new Error('DummyJSON вернул пустой список');
+        }
+
+        dishes = mapDummyRecipes(data.recipes);
+        dataSource = 'dummyjson';
+
+        showApiStatus(
+            'demo',
+            'Демо-режим: меню загружено напрямую из DummyJSON. Заказы сохраняются в браузере.'
+        );
+
+        restoreSelectionFromCart();
+        renderDishes();
+
+    } catch (error) {
+        showApiStatus(
+            'error',
+            'Не удалось загрузить меню из DummyJSON. Проверьте подключение к интернету.'
+        );
+
+        console.error('Ошибка загрузки блюд:', error);
     }
-    restoreSelectionFromCart();
-    renderDishes();
 }
 
 function restoreSelectionFromCart() {
