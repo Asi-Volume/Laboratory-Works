@@ -1,10 +1,21 @@
 let dishes = [];
 
 async function loadDishes() {
-    const response = await fetch('https://edu.std-900.ist.mospolytech.ru/labs/api/dishes');
-    const data = await response.json();
-    dishes = data;
-    renderDishes();
+    try {
+        const response = await fetch('https://dummyjson.com/recipes?limit=30');
+
+        if (!response.ok) {
+            throw new Error('Ошибка загрузки блюд');
+        }
+
+        const data = await response.json();
+
+        dishes = mapDummyRecipes(data.recipes);
+
+        renderDishes();
+    } catch (error) {
+        console.error('Ошибка загрузки блюд:', error);
+    }
 }
 
 function renderDishes() {
